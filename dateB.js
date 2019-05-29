@@ -15,9 +15,9 @@ weekday[6] = "Saturday";
 
 function myDateCalc() {
   let days = [];
-//  let startDate = new Date();   Using today as start date
-let startDate = document.getElementById('startDate').value;
-  let myDate = document.getElementById('date').value; //Users input
+  //  let startDate = new Date();   Using today as start date
+  let startDate = document.getElementById("startDate").value;
+  let myDate = document.getElementById("date").value; //Users input
   let endDate = new Date(myDate); // Formating the date for java script
   startDate = new Date(startDate);
 
@@ -29,44 +29,43 @@ let startDate = document.getElementById('startDate').value;
     console.log(weekDayName);
   }
   console.log(days.length);
-  document.getElementById('calc').innerHTML = "Days til then: " + days.length; // This needs to be inside the function
+  document.getElementById("calc").innerHTML = "Days til then: " + days.length; // This needs to be inside the function
 }
-
-
 
 function buisnessCalc() {
   let days = [];
   //let startDate = new Date();   Using today as start date
-  let startDate = document.getElementById('startDate').value;
-  let myDate = document.getElementById('date').value; //Users input
+  let startDate = document.getElementById("startDate").value;
+  let myDate = document.getElementById("date").value; //Users input
   let endDate = new Date(myDate);
   startDate = new Date(startDate);
 
   while (startDate <= endDate) {
-
-    let weekDayName = weekday[startDate.getDay()];//startDate.getDay gives a number 0-6
+    let weekDayName = weekday[startDate.getDay()]; //startDate.getDay gives a number 0-6
     startDate.setDate(startDate.getDate() + 1); //this is taking date and extracts only the day number
 
-    if (weekDayName != "Saturday" && weekDayName  != "Sunday" ) {
+    if (weekDayName != "Saturday" && weekDayName != "Sunday") {
       days.push(weekDayName);
     }
-
   }
   console.log(days.length);
-document.getElementById('buisness').innerHTML = "Buisnessdays til then " + days.length; // This needs to be inside the function
+  document.getElementById("buisness").innerHTML =
+    "Buisnessdays til then " + days.length; // This needs to be inside the function
 }
 /////////////////////Real time counter///////
 
-// Milliseconds til the date we're counting down to
-let countDownDate = new Date("Dec 24, 2019 18:37:25").getTime();
-console.log(countDownDate);
+
 // Update the count down every 1 second
 let x = setInterval(function() {
   // Todays date and time in milliseconds
-  let now = new Date().getTime();
+  let now = new Date();
+
+//Milliseconds till the day we are counting down to
+  let countdownMyDate = document.getElementById("date").value; //Users input
+  let countdownEndate = new Date(countdownMyDate); // Formating the date for java script
 
   // Milliseconds from countDown date till now
-  let distance = countDownDate - now;
+  let distance = countdownEndate - now;
 
   // Time calculations for days, hours, minutes and seconds
   let days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -74,11 +73,12 @@ let x = setInterval(function() {
   let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
+  if(countdownEndate>0){
+    document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+  }
   // When the date has already been count down
-    if (distance < 0) {
-      clearInterval(x);
-      document.getElementById("demo").innerHTML = "EXPIRED";
-    }
-}, 1000);// Update the count down every 1 second
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000); // Update the count down every 1 second
