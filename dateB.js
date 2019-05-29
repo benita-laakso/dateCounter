@@ -66,6 +66,7 @@ let x = setInterval(function() {
 
   // Milliseconds from countDown date till now
   let distance = countdownEndate - now;
+  //When you do mathmatics on dates it will return it in milliseconds.
 
   // Time calculations for days, hours, minutes and seconds
   let days = Math.floor(distance / (1000 * 60 * 60 * 24));
